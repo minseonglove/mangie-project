@@ -10,13 +10,13 @@ import java.util.Arrays;
 public class SongList {
 
     @GetMapping("/songlist")
-    public String[][] getList(){
+    public SongInfo[][] getList(){
         File f = new File("mangie-vue/src/assets/img/thumbnails");
         // dlc폴더 배열
         String[] dlcList = f.list();
         int dirLen = dlcList.length;
-        // dlc별로 곡 이름을 넣을 배열
-        String[][] songList = new String[dirLen+1][];
+        // dlc별로 곡 이름, dlc을 넣을 배열
+        SongInfo[][] songList = new SongInfo[dirLen+1][];
         // 곡 갯수
         int songCount = 0;
         for(int i = 1; i <= dirLen; i++){
@@ -27,16 +27,17 @@ public class SongList {
             // .jpg 때기
             for(int k = 0; k < len; k++)
                 list[k] = list[k].split("\\.")[0];
-            songList[i] = new String[list.length];
-            songList[i] = list.clone();
+            songList[i] = new SongInfo[len];
+            for(int k = 0; k < len; k++)
+                songList[i][k] = new SongInfo(list[k],i);
             songCount += list.length;
         }
         // 전체 곡 이름을 넣을 0번 배열 크기 할당
-        songList[0] = new String[songCount];
+        songList[0] = new SongInfo[songCount];
         songCount = 0;
         for(int i = 1; i <= dirLen; i++){
             // 야무지게 넣는다
-            for(String s : songList[i]){
+            for(SongInfo s : songList[i]){
                 songList[0][songCount] = s;
                 songCount++;
             }
