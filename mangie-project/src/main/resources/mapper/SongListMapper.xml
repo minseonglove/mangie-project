@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mangieproject.mapper.SongListMapper">
+    <select id="selectCategory" parameterType="String" resultType="SongListVo">
+        SELECT file_name, song_name, bpm, artist, category FROM ${category} ORDER BY file_name
+    </select>
+</mapper>

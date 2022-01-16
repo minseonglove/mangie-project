@@ -1,11 +1,14 @@
 package com.mangieproject.CustomBoard;
 
+import com.mangieproject.vo.SongListVo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+
 @RestController
 public class SongListController {
-    private final SongInfo[][] songList;
+    private final ArrayList<ArrayList<SongListVo>> songList;
 
     //곡 리스트 초기화
     SongListController(SongListService songListService){
@@ -13,9 +16,8 @@ public class SongListController {
         System.out.println("songList 초기화");
     }
 
-    //Mono에 감쌀 필요가 있을까
     @GetMapping("/songlist")
-    public SongInfo[][] getList(){
+    public ArrayList<ArrayList<SongListVo>> getList(){
         System.out.println("songList를 가져왔어여");
         return songList;
     }
