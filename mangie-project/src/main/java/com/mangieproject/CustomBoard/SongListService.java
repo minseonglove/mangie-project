@@ -1,22 +1,24 @@
 package com.mangieproject.CustomBoard;
 
-import com.mangieproject.mapper.SongListMapper;
+import com.mangieproject.Repository.SongListRepository;
 import com.mangieproject.vo.SongListVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 @Service
 public class SongListService{
 
-    public static final String[] SONG_CATEGORY = {"respect", "portable1", "portable2", "portable3", "trilogy",
+    private static final String[] SONG_CATEGORY = {"respect", "portable1", "portable2", "portable3", "trilogy",
                                                     "clazziquai", "blacksquare", "technika1", "technika2", "technika3",
                                                     "emotional", "vextension", "collaboration"};
-    public final SongListMapper mapper;
-    public SongListService(SongListMapper mapper) {
-        this.mapper = mapper;
+    private final SongListRepository repository;
+
+    @Autowired
+    public SongListService(SongListRepository repository) {
+        this.repository = repository;
     }
 
     public ArrayList<ArrayList<SongListVo>> getSongList(){
@@ -32,7 +34,7 @@ public class SongListService{
         songList.get(0).sort(Comparator.comparing(SongListVo::getFile_name));
         return songList;
     }
-    public ArrayList<SongListVo> selectCategory(String category){
-        return mapper.selectCategory(category);
+    private ArrayList<SongListVo> selectCategory(String category){
+        return repository.findByCategory(category);
     }
 }
