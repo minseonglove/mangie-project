@@ -13,7 +13,7 @@ public class SongListService{
 
     private static final String[] SONG_CATEGORY = {"respect", "portable1", "portable2", "portable3", "trilogy",
                                                     "clazziquai", "blacksquare", "technika1", "technika2", "technika3",
-                                                    "emotional", "vextension", "collaboration"};
+                                                    "emotional", "vextension", "vextension2", "collaboration"};
     private final SongListRepository repository;
 
     @Autowired
